@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCO420 - Intranet</title>
+    <style>
+        :root {
+            --color1: #031716;
+            --color2: #032F30;
+            --color3: #0A7075;
+            --color4: #0C969C;
+            --color5: #6BA3BE;
+            --color6: #274D60;
+            --light-text: #f0f0f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--color2);
+            color: var(--light-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--color1), var(--color6));
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Q50,80 0,100 Z" fill="%230A7075" opacity="0.1"/></svg>');
+            background-size: cover;
+            z-index: 0;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            animation: fadeInDown 1s ease-out;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            background-color: rgba(3, 23, 22, 0.7);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        section::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--color3), var(--color5));
+            transition: height 0.3s ease;
+        }
+        
+        section:hover::after {
+            height: 10px;
+        }
+        
+        h2 {
+            color: var(--color5);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--color4);
+            transition: width 0.3s ease;
+        }
+        
+        h2:hover::after {
+            width: 100%;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+        
+        .professor-info {
+            display: flex;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background-color: rgba(10, 112, 117, 0.2);
+            border-radius: 8px;
+            border-left: 5px solid var(--color4);
+            animation: slideInLeft 1s ease-out;
+        }
+        
+        .professor-info p {
+            margin-bottom: 0;
+        }
+        
+        .student-info {
+            background-color: rgba(39, 77, 96, 0.3);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            border-right: 5px solid var(--color5);
+            animation: slideInRight 1s ease-out;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: var(--color1);
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .floating-bubbles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            background-color: rgba(12, 150, 156, 0.1);
+            border-radius: 50%;
+            animation: float linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            main {
+                padding: 0 1rem;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-bubbles" id="bubbles"></div>
+    
+    <header class="pulse">
+        <h1>SCO420 - Intranet</h1>
+        <p class="subtitle">Sistemas de Comunicación para Organizaciones</p>
+    </header>
+    
+    <main>
+        <section>
+            <h2>¿Qué es una Intranet?</h2>
+            <p>Una intranet es una red privada de computadoras que utiliza tecnología de Internet para compartir información, sistemas operativos o servicios de computación dentro de una organización. A diferencia de Internet que es accesible para todo el mundo, una intranet está restringida solo a los miembros de la organización.</p>
+            <p>Las intranets modernas ofrecen numerosas funcionalidades como portales de empleados, gestión documental, herramientas de colaboración, directorios corporativos, flujos de trabajo automatizados y acceso a sistemas empresariales. Todo esto con el objetivo de mejorar la comunicación interna, aumentar la productividad y facilitar el intercambio de información.</p>
+        </section>
+        
+        <section>
+            <h2>Beneficios de una Intranet</h2>
+            <p>• Mejora la comunicación interna en todos los niveles de la organización</p>
+            <p>• Centraliza la información importante de la empresa</p>
+            <p>• Facilita la colaboración entre departamentos y equipos</p>
+            <p>• Reduce el uso de papel al digitalizar procesos</p>
+            <p>• Permite el acceso remoto seguro a recursos corporativos</p>
+            <p>• Establece un canal oficial para difundir políticas y noticias</p>
+        </section>
+        
+        <div class="professor-info">
+            <div>
+                <h3>Docente de la Materia</h3>
+                <p><strong>Ingeniero Marco Arenas Porcel</strong></p>
+                <p>Experto en redes y sistemas de comunicación organizacional con más de 15 años de experiencia en diseño e implementación de infraestructuras de red para empresas e instituciones educativas.</p>
+            </div>
+        </div>
+        
+        <div class="student-info">
+            <h3>Información del Estudiante</h3>
+            <p><strong>Nombre:</strong> Siñani Duran Dario Michel</p>
+            <p><strong>Carrera:</strong> Ingeniería en Tecnologías de la Información y Seguridad (TIS)</p>
+            <p><strong>Universidad:</strong> Universidad San Francisco Xavier de Chuquisaca (USFX)</p>
+            <p><strong>Año Académico:</strong> 2025</p>
+        </div>
+    </main>
+    
+    <footer>
+        <p>SCO420 - Intranet | Universidad San Francisco Xavier de Chuquisaca © 2025</p>
+    </footer>
+    
+    <script>
+        // Crear burbujas flotantes
+        function createBubbles() {
+            const bubblesContainer = document.getElementById('bubbles');
+            const bubbleCount = 20;
+            
+            for (let i = 0; i < bubbleCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+                
+                // Tamaño aleatorio entre 10px y 100px
+                const size = Math.random() * 90 + 10;
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                
+                // Posición aleatoria en el ancho de la pantalla
+                bubble.style.left = `${Math.random() * 100}vw`;
+                
+                // Duración de la animación entre 10s y 20s
+                const duration = Math.random() * 10 + 10;
+                bubble.style.animationDuration = `${duration}s`;
+                
+                // Retraso inicial aleatorio
+                bubble.style.animationDelay = `${Math.random() * 5}s`;
+                
+                bubblesContainer.appendChild(bubble);
+            }
+        }
+        
+        // Efecto de escritura para el título
+        function typeWriterEffect() {
+            const title = document.querySelector('h1');
+            const originalText = title.textContent;
+            title.textContent = '';
+            
+            let i = 0;
+            const speed = 100; // velocidad en milisegundos
+            
+            function type() {
+                if (i < originalText.length) {
+                    title.textContent += originalText.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            
+            type();
+        }
+        
+        // Animación al hacer scroll
+        function animateOnScroll() {
+            const sections = document.querySelectorAll('section');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            sections.forEach(section => {
+                section.style.opacity = 0;
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(section);
+            });
+        }
+        
+        // Inicializar todas las animaciones
+        window.onload = function() {
+            createBubbles();
+            // typeWriterEffect(); // Descomentar si se desea el efecto de máquina de escribir
+            animateOnScroll();
+        };
+    </script>
+</body>
+</html>
